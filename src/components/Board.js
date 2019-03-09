@@ -1,18 +1,53 @@
 import React from 'react';
-import { string } from 'postcss-selector-parser';
+import styled from 'styled-components';
+
+const BoardCellDiv = styled.div`
+padding:40px;
+border:1px solid black;
+`;
+
+
+const BoardCell = ({i, j}) => { 
+
+	return (
+		<BoardCellDiv> {`(${i} , ${j})`} </BoardCellDiv>
+	)	
+
+}
+
+
+const BoardRowDiv = styled.div`
+display:flex;
+flex-direction:columns;
+`;
+
+const BoardRow = ({i}) => { 
+
+	const columns = [];
+	
+	
+	for (let j=0; j<5; j++){
+		columns [j] = <BoardCell i={i} j={j}/>;
+	}
+
+	
+	return (
+		<BoardRowDiv>
+			{columns}
+		</BoardRowDiv>
+	)	
+
+}
 
 const Board = (props) => { 
 
 	const rows = [];
 	
 	for (let i=0; i<5; i++){
-		const columns = [];
-		for (let j=0; j<5; j++){
-			columns [j] = <div> {`(${i} , ${j})`} </div>;
-		}
-		rows[i] = <div> {columns} </div>;
-	}
 
+		rows[i] = <BoardRow i={i}/>;
+	}
+	
 	return (
 		<div>
 			{rows}
