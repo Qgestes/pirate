@@ -7,7 +7,7 @@ import {action} from '@storybook/addon-actions';
 
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 
-import Dashboard from '../src/components/Dashboard';
+import Dashboard, {AttackButtons} from '../src/components/Dashboard';
 
 const dashboardState = {player: 1, pirates: 3, coco: 2, rhum: 2, wood: 10, telescope: false, canon: true, sail: false};
 onTurn, onMove, onAttack, onExplore, onFish, onEnroll;
@@ -26,3 +26,7 @@ storiesOf('Dashboard', module)
   .add('normal', () => <Dashboard state={dashboardState} actions={actions} round={{}} />)
   .add('turning', () => <Dashboard state={dashboardState} actions={actions} round={{action: 'turn'}} />)
   .add('moving', () => <Dashboard state={dashboardState} actions={actions} round={{action: 'move'}} />);
+
+storiesOf('Dashboard/AttackButtons', module).add('normal', () => (
+  <AttackButtons onAttack={action('attack')} player$={1} />
+));

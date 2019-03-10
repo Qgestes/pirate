@@ -39,7 +39,7 @@ const initialBoard = [
 ];
 
 const player1 = {
-  player: 1,
+  player$: 1,
   pirates: 3,
   coco: 2,
   rhum: 2,
@@ -52,7 +52,7 @@ const player1 = {
   direction: 'south',
 };
 const player2 = {
-  player: 2,
+  player$: 2,
   pirates: 4,
   coco: 2,
   rhum: 2,
