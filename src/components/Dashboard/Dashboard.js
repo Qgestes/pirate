@@ -9,6 +9,7 @@ const DashboardDiv = styled.div`
   box-sizing: border-box;
   padding: 10px;
   width: 190px;
+  padding-bottom: 30px;
 `;
 
 const DashboardButtonDiv = styled.div`
