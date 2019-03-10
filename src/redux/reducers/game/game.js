@@ -1,7 +1,8 @@
 import * as actions from '../../actions';
 
-import {applyBoardCellUpdate, applyPlayerUpdate, getPlayerFromState} from './modifications';
+import {StateModifier, applyPlayerUpdate, getPlayerFromState} from './modifications';
 import {initialState, generateInitialBoard} from './initialState';
+import applyAttack from './applyAttack';
 
 export function applyTurn(state, player$, direction) {
   return applyPlayerUpdate(state, player$, {direction});
@@ -38,13 +39,16 @@ export function applyMove(state, player$, direction) {
     default:
       break;
   }
+
+  const modifier = new StateModifier(state);
+
   if (modifications.direction) {
-    const newPlayerState = applyPlayerUpdate(state, player$, {...modifications});
-    return applyBoardCellUpdate(newPlayerState, modifications.posX, modifications.posY, {
+    modifier.updatePlayer(player$, {...modifications});
+    modifier.updateBoard(modifications.posX, modifications.posY, {
       hidden: false,
     });
   }
-  return state;
+  return modifier.state;
 }
 
 export default function(state = initialState, action) {
@@ -65,6 +69,11 @@ export default function(state = initialState, action) {
     case actions.GAME_MOVE_PLAYER: {
       const {player, direction} = action.payload;
       return applyMove(state, player, direction);
+    }
+
+    case actions.GAME_ATTACK: {
+      const {player, direction} = action.payload;
+      return applyAttack(state, player, direction);
     }
 
     default:

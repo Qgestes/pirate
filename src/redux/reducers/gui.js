@@ -1,6 +1,6 @@
 import * as actions from '../actions';
 
-import {generatePlayerUpdate} from './game';
+import {applyPlayerUpdate} from './game/modifications';
 
 export const initialState = {
   player1: {},
@@ -12,11 +12,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case actions.GUI_DASHBOARD_SET_ACTION: {
       const {player, action: playerAction} = action.payload;
-      const result = generatePlayerUpdate(state, player, {action: playerAction});
-      return {
-        ...state,
-        ...result,
-      };
+      return applyPlayerUpdate(state, player, {action: playerAction});
     }
 
     default:

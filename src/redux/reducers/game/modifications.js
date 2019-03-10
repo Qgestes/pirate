@@ -1,7 +1,13 @@
 export function getPlayerFromState(state, player$) {
   if (player$ === 1) return state.player1;
   if (player$ === 2) return state.player2;
-  return null;
+  throw new Error('WTF');
+}
+
+export function getOtherPlayerFromState(state, player$) {
+  if (player$ === 1) return state.player2;
+  if (player$ === 2) return state.player1;
+  throw new Error('WTF');
 }
 
 export function generatePlayerForState(player$, player) {
@@ -36,4 +42,20 @@ export function applyPlayerUpdate(state, player$, modifications) {
     ...state,
     ...newPlayerState,
   };
+}
+
+export class StateModifier {
+  constructor(state) {
+    this.state = state;
+  }
+
+  updatePlayer(player$, modifications) {
+    this.state = applyPlayerUpdate(this.state, player$, modifications);
+    return this;
+  }
+
+  updateBoard(posX, posY, modifications) {
+    this.state = applyBoardCellUpdate(this.state, posX, posY, modifications);
+    return this;
+  }
 }

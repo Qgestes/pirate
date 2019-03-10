@@ -32,7 +32,7 @@ const DashboardSpacerDiv = styled.div`
 `;
 
 const Dashboard = ({state, actions, round}) => {
-  const {player$, pirates, coco, rhum, wood, telescope, canon, sail} = state;
+  const {player$, life, canonball, food} = state;
   const {onTurn, onMove, onAttack, onExplore, onFish, onEnroll, onAction} = actions;
 
   let actionElements;
@@ -89,13 +89,10 @@ const Dashboard = ({state, actions, round}) => {
   return (
     <DashboardDiv>
       <div>{`player: ${player$}`}</div>
-      <div>{`pirates: ${pirates}`}</div>
-      <div>{`coco: ${coco}`}</div>
-      <div>{`rhum: ${rhum}`}</div>
-      <div>{`wood: ${wood}`}</div>
-      <div>{`telescope: ${telescope}`}</div>
-      <div>{`canon: ${canon}`}</div>
-      <div>{`sail: ${sail}`}</div>
+      <div>{`life: ${life}`}</div>
+      <div>{`canonball: ${canonball}`}</div>
+      <div>{`food: ${food}`}</div>
+
       <DashboardSpacerDiv />
       {actionElements}
     </DashboardDiv>

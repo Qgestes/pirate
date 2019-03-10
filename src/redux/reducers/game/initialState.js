@@ -38,13 +38,8 @@ export const initialBoard = [
 
 export const initialPlayer1 = {
   player$: 1,
-  pirates: 3,
-  coco: 2,
-  rhum: 2,
-  wood: 10,
-  telescope: false,
-  canon: true,
-  sail: false,
+  life: 3,
+  canonball: 3,
   posX: 2,
   posY: 0,
   direction: 'south',
@@ -52,13 +47,8 @@ export const initialPlayer1 = {
 
 export const initialPlayer2 = {
   player$: 2,
-  pirates: 4,
-  coco: 2,
-  rhum: 2,
-  wood: 10,
-  telescope: false,
-  canon: true,
-  sail: false,
+  life: 3,
+  canonball: 3,
   posX: 2,
   posY: 4,
   direction: 'north',

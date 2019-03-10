@@ -1,6 +1,7 @@
 export const GLOBAL_NEW_GAME = 'GLOBAL_NEW_GAME';
 export const GAME_TURN_PLAYER = 'GAME_TURN_PLAYER';
 export const GAME_MOVE_PLAYER = 'GAME_MOVE_PLAYER';
+export const GAME_ATTACK = 'GAME_ATTACK';
 export const GUI_DASHBOARD_SET_ACTION = 'GUI_DASHBOARD_SET_ACTION';
 
 export const newGame = () => ({
@@ -18,6 +19,14 @@ export const turnPlayer = (player, direction) => ({
 
 export const movePlayer = (player, direction) => ({
   type: GAME_MOVE_PLAYER,
+  payload: {
+    player,
+    direction,
+  },
+});
+
+export const attack = (player, direction) => ({
+  type: GAME_ATTACK,
   payload: {
     player,
     direction,

@@ -47,10 +47,10 @@ const AttackButtons = ({onAttack, player$}) => {
       <AttackCellDiv onClick={() => onAttack(player$, 'R1')} top={'75px'} right={'30px'} />
       <AttackCellDiv onClick={() => onAttack(player$, 'L2')} top={'75px'} left={'5px'} />
       <AttackCellDiv onClick={() => onAttack(player$, 'R2')} top={'75px'} right={'5px'} />
-      <AttackCellDiv onClick={() => onAttack(player$, 'TL')} top={'50px'} left={'30px'} />
-      <AttackCellDiv onClick={() => onAttack(player$, 'TR')} top={'50px'} right={'30px'} />
-      <AttackCellDiv onClick={() => onAttack(player$, 'BL')} top={'100px'} left={'30px'} />
-      <AttackCellDiv onClick={() => onAttack(player$, 'BR')} top={'100px'} right={'30px'} />
+      <AttackCellDiv onClick={() => onAttack(player$, 'LT')} top={'50px'} left={'30px'} />
+      <AttackCellDiv onClick={() => onAttack(player$, 'RT')} top={'50px'} right={'30px'} />
+      <AttackCellDiv onClick={() => onAttack(player$, 'LB')} top={'100px'} left={'30px'} />
+      <AttackCellDiv onClick={() => onAttack(player$, 'RB')} top={'100px'} right={'30px'} />
     </ContainerDiv>
   );
 };
