@@ -3,38 +3,38 @@ import * as actions from '../actions';
 const board = [
   [
     {type: 'island', hidden: false},
-    {type: 'island', hidden: true},
-    {type: 'empty', hidden: false},
-    {type: 'merchant', hidden: true},
-    {type: 'empty', hidden: false},
-  ],
-  [
-    {type: 'fortress', hidden: true},
     {type: 'island', hidden: false},
-    {type: 'empty', hidden: true},
-    {type: 'empty', hidden: true},
     {type: 'empty', hidden: false},
-  ],
-  [
-    {type: 'empty', hidden: true},
-    {type: 'island', hidden: false},
-    {type: 'empty', hidden: true},
     {type: 'merchant', hidden: false},
-    {type: 'island', hidden: true},
-  ],
-  [
-    {type: 'monster', hidden: true},
     {type: 'empty', hidden: false},
-    {type: 'monster', hidden: false},
-    {type: 'fortress', hidden: true},
-    {type: 'empty', hidden: true},
   ],
   [
     {type: 'fortress', hidden: false},
-    {type: 'island', hidden: true},
+    {type: 'island', hidden: false},
     {type: 'empty', hidden: false},
-    {type: 'merchant', hidden: true},
-    {type: 'empty', hidden: true},
+    {type: 'empty', hidden: false},
+    {type: 'empty', hidden: false},
+  ],
+  [
+    {type: 'empty', hidden: false},
+    {type: 'island', hidden: false},
+    {type: 'empty', hidden: false},
+    {type: 'merchant', hidden: false},
+    {type: 'island', hidden: false},
+  ],
+  [
+    {type: 'monster', hidden: false},
+    {type: 'empty', hidden: false},
+    {type: 'monster', hidden: false},
+    {type: 'fortress', hidden: false},
+    {type: 'empty', hidden: false},
+  ],
+  [
+    {type: 'fortress', hidden: false},
+    {type: 'island', hidden: false},
+    {type: 'empty', hidden: false},
+    {type: 'merchant', hidden: false},
+    {type: 'empty', hidden: false},
   ],
 ];
 
@@ -77,7 +77,7 @@ function getPlayer(state, player$) {
   return null;
 }
 
-function applyPlayer(player$, player) {
+function generatePlayer(player$, player) {
   if (player$ === 1) {
     return {
       player1: player,
@@ -91,24 +91,54 @@ function applyPlayer(player$, player) {
   throw new Error('Invalid player');
 }
 
-function updatePlayer(state, player$, modifications) {
+function generatePlayerUpdate(state, player$, modifications) {
   const player = getPlayer(state, player$);
-  return applyPlayer(player$, {...player, ...modifications});
+  return generatePlayer(player$, {...player, ...modifications});
 }
 
-function applyTurn(state, player$, direction) {
-  return updatePlayer(state, player$, {direction});
+function generateTurn(state, player$, direction) {
+  return generatePlayerUpdate(state, player$, {direction});
 }
 
-function applyMove(state, player$, direction) {
-  return updatePlayer(state, player$, {direction});
+function generateMove(state, player$, direction) {
+  const player = getPlayer(state, player$);
+  const modifications = {};
+  switch (direction) {
+    case 'north':
+      if (player.posY > 0) {
+        modifications.posY = player.posY - 1;
+        modifications.direction = direction;
+      }
+      break;
+    case 'south':
+      if (player.posY < 4) {
+        modifications.posY = player.posY + 1;
+        modifications.direction = direction;
+      }
+      break;
+    case 'west':
+      if (player.posX > 0) {
+        modifications.posX = player.posX - 1;
+        modifications.direction = direction;
+      }
+      break;
+    case 'east':
+      if (player.posX < 4) {
+        modifications.posX = player.posX + 1;
+        modifications.direction = direction;
+      }
+      break;
+    default:
+      break;
+  }
+  return generatePlayer(player$, {...player, ...modifications});
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case actions.GAME_TURN_PLAYER: {
       const {player, direction} = action.payload;
-      const result = applyTurn(state, player, direction);
+      const result = generateTurn(state, player, direction);
       return {
         ...state,
         ...result,
@@ -117,7 +147,7 @@ export default function(state = initialState, action) {
 
     case actions.GAME_MOVE_PLAYER: {
       const {player, direction} = action.payload;
-      const result = applyMove(state, player, direction);
+      const result = generateMove(state, player, direction);
       return {
         ...state,
         ...result,

@@ -17,8 +17,8 @@ const generateActions = dispatch => {
     onMove: player$ => dispatch(actions.turnPlayer(player$, 'east')),
     onAttack: player$ => dispatch(actions.turnPlayer(player$, 'south')),
     onExplore: player$ => dispatch(actions.turnPlayer(player$, 'west')),
-    onFish: player$ => dispatch(actions.turnPlayer(player$, 'west')),
-    onEnroll: player$ => dispatch(actions.turnPlayer(player$, 'west')),
+    onFish: player$ => dispatch(actions.movePlayer(player$, 'west')),
+    onEnroll: player$ => dispatch(actions.movePlayer(player$, 'west')),
   };
 };
 
