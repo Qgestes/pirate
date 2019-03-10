@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 // import {action} from '@storybook/addon-actions';
 // import {linkTo} from '@storybook/addon-links';
 
-import {withKnobs, boolean, select} from '@storybook/addon-knobs';
+import {withKnobs, boolean, select, number} from '@storybook/addon-knobs';
 
 import Board, {BoardCell} from '../src/components/Board';
 
@@ -60,7 +60,30 @@ const optionsPlayer = {
   None: null,
 };
 
-storiesOf('Board', module).add('stuffed', () => <Board state={boardState} />);
+const optionsPos = {
+  range: true,
+  min: 0,
+  max: 4,
+  step: 1,
+};
+
+storiesOf('Board', module)
+  .addDecorator(withKnobs)
+  .add('stuffed', () => (
+    <Board
+      state={boardState}
+      player1={{
+        direction: select('P1 Direction', optionsDirection, 'south', 'Player1'),
+        posX: number('P1 Pos X', 2, optionsPos, 'Player1'),
+        posY: number('P1 Pos Y', 0, optionsPos, 'Player1'),
+      }}
+      player2={{
+        direction: select('P2 Direction', optionsDirection, 'north', 'Player2'),
+        posX: number('P2 Pos X', 2, optionsPos, 'Player2'),
+        posY: number('P2 Pos Y', 4, optionsPos, 'Player2'),
+      }}
+    />
+  ));
 
 storiesOf('Board/Cell', module)
   .addDecorator(withKnobs)

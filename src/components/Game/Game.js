@@ -13,7 +13,7 @@ const Game = ({game}) => {
   return (
     <GameDiv>
       <Dashboard state={game.player1} actions={{}} />
-      <Board state={game.board} />
+      <Board state={game.board} player1={game.player1} player2={game.player2} />
       <Dashboard state={game.player2} actions={{}} />
     </GameDiv>
   );
