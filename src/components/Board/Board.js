@@ -19,11 +19,11 @@ const BoardRow = ({row}) => {
   return <BoardRowDiv>{columns}</BoardRowDiv>;
 };
 
-const Board = ({board}) => {
+const Board = ({state}) => {
   const rows = [];
 
   for (let i = 0; i < 5; i += 1) {
-    rows[i] = <BoardRow row={board[i]} />;
+    rows[i] = <BoardRow row={state[i]} />;
   }
 
   return <div>{rows}</div>;

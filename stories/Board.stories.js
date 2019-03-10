@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 // import {action} from '@storybook/addon-actions';
 // import {linkTo} from '@storybook/addon-links';
 
-import {withKnobs, boolean} from '@storybook/addon-knobs';
+import {withKnobs, boolean, select} from '@storybook/addon-knobs';
 
 import Board, {BoardCell} from '../src/components/Board';
 
@@ -47,13 +47,68 @@ const boardState = [
   ],
 ];
 
-storiesOf('Board', module).add('stuffed', () => <Board board={boardState} />);
+const optionsDirection = {
+  North: 'north',
+  South: 'south',
+  East: 'east',
+  West: 'west',
+  None: null,
+};
+const optionsPlayer = {
+  Player1: 1,
+  Player2: 2,
+  None: null,
+};
+
+storiesOf('Board', module).add('stuffed', () => <Board state={boardState} />);
 
 storiesOf('Board/Cell', module)
   .addDecorator(withKnobs)
   .add('empty', () => <BoardCell />)
-  .add('island', () => <BoardCell type="island" hidden={boolean('Hidden', false)} />)
-  .add('monster', () => <BoardCell type="monster" hidden={boolean('Hidden', false)} />)
-  .add('merchant', () => <BoardCell type="merchant" hidden={boolean('Hidden', false)} />)
-  .add('fortress', () => <BoardCell type="fortress" hidden={boolean('Hidden', false)} />)
-  .add('hidden', () => <BoardCell hidden={boolean('Hidden', true)} />);
+  .add('island', () => (
+    <BoardCell
+      type="island"
+      hidden={boolean('Hidden', false)}
+      direction={select('Direction', optionsDirection, null)}
+      player={select('Player', optionsPlayer, null)}
+    />
+  ))
+  .add('monster', () => (
+    <BoardCell
+      type="monster"
+      hidden={boolean('Hidden', false)}
+      direction={select('Direction', optionsDirection, null)}
+      player={select('Player', optionsPlayer, null)}
+    />
+  ))
+  .add('merchant', () => (
+    <BoardCell
+      type="merchant"
+      hidden={boolean('Hidden', false)}
+      direction={select('Direction', optionsDirection, null)}
+      player={select('Player', optionsPlayer, null)}
+    />
+  ))
+  .add('fortress', () => (
+    <BoardCell
+      type="fortress"
+      hidden={boolean('Hidden', false)}
+      direction={select('Direction', optionsDirection, null)}
+      player={select('Player', optionsPlayer, null)}
+    />
+  ))
+  .add('hidden', () => (
+    <BoardCell
+      hidden={boolean('Hidden', true)}
+      direction={select('Direction', optionsDirection, null)}
+      player={select('Player', optionsPlayer, null)}
+    />
+  ))
+  .add('player1', () => (
+    <BoardCell
+      type="fortress"
+      hidden={boolean('Hidden', false)}
+      direction={select('Direction', optionsDirection, 'east')}
+      player={select('Player', optionsPlayer, 1)}
+    />
+  ));

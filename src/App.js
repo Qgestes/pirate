@@ -1,26 +1,65 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+
+import Game from './components/Game';
+
+const AppDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
+
+const board = [
+  [
+    {type: 'island', hidden: false},
+    {type: 'island', hidden: true},
+    {type: 'empty', hidden: false},
+    {type: 'merchant', hidden: true},
+    {type: 'empty', hidden: false},
+  ],
+  [
+    {type: 'fortress', hidden: true},
+    {type: 'island', hidden: false},
+    {type: 'empty', hidden: true},
+    {type: 'empty', hidden: true},
+    {type: 'empty', hidden: false},
+  ],
+  [
+    {type: 'empty', hidden: true},
+    {type: 'island', hidden: false},
+    {type: 'empty', hidden: true},
+    {type: 'merchant', hidden: false},
+    {type: 'island', hidden: true},
+  ],
+  [
+    {type: 'monster', hidden: true},
+    {type: 'empty', hidden: false},
+    {type: 'monster', hidden: false},
+    {type: 'fortress', hidden: true},
+    {type: 'empty', hidden: true},
+  ],
+  [
+    {type: 'fortress', hidden: false},
+    {type: 'island', hidden: true},
+    {type: 'empty', hidden: false},
+    {type: 'merchant', hidden: true},
+    {type: 'empty', hidden: true},
+  ],
+];
+
+const player1 = {player: 1, pirates: 3, coco: 2, rhum: 2, wood: 10, telescope: false, canon: true, sail: false};
+const player2 = {player: 2, pirates: 4, coco: 2, rhum: 2, wood: 10, telescope: false, canon: true, sail: false};
+
+const gameState = {player1, player2, board};
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit 
-{' '}
-<code>src/App.js</code>
-            {' '}
-and save to reload.
-          </p>
-          <a
-          <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-            Learn React
-          </a>
-        </header>
-      </div>
+      <AppDiv>
+        <Game game={gameState} />
+      </AppDiv>
     );
   }
 }

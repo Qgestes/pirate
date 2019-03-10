@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import emptyCellImg from '../../../images/png/board_unit.png';
-import monsterCellImg from '../../../images/png/monster.png';
-import merchantBoatCellImg from '../../../images/png/merchant_boat.png';
-import islandCellImg from '../../../images/png/island.png';
-import fortressCellImg from '../../../images/png/fortress.png';
+import emptyCellImg from './png/board_unit.png';
+import monsterCellImg from './png/monster.png';
+import merchantBoatCellImg from './png/merchant_boat.png';
+import islandCellImg from './png/island.png';
+import fortressCellImg from './png/fortress.png';
+import playerBoatCellImg from './png/player_boat.png';
 
 const typeImg = {
   empty: emptyCellImg,
@@ -12,6 +13,21 @@ const typeImg = {
   monster: monsterCellImg,
   merchant: merchantBoatCellImg,
   fortress: fortressCellImg,
+};
+
+const transformDirection = ({direction}) => {
+  switch (direction) {
+    case 'north':
+      return 'rotate(0deg)';
+    case 'south':
+      return 'rotate(180deg)';
+    case 'east':
+      return 'rotate(90deg)';
+    case 'west':
+      return 'rotate(270deg)';
+    default:
+      return '';
+  }
 };
 
 const BoardCellDiv = styled.div`
@@ -30,13 +46,30 @@ const BoardCellHiddenDiv = styled.div`
   height: 100px;
 `;
 
-const BoardCell = ({type, hidden}) => {
+const BoardPlayerDiv = styled(BoardCellDiv)`
+  color: white;
+  font-size: x-large;
+  transform: ${transformDirection};
+  justify-content: center;
+  align-items: center;
+`;
+
+const BoardCell = ({type, hidden, player, direction}) => {
   let element;
+  let playerElement;
+
+  if (player) {
+    playerElement = (
+      <BoardPlayerDiv direction={direction} img={playerBoatCellImg}>
+        {player}
+      </BoardPlayerDiv>
+    );
+  }
 
   if (hidden) {
     element = <BoardCellHiddenDiv />;
   } else {
-    element = <BoardCellDiv img={typeImg[type]} />;
+    element = <BoardCellDiv img={typeImg[type]}>{playerElement}</BoardCellDiv>;
   }
 
   return <BoardCellDiv img={emptyCellImg}>{element}</BoardCellDiv>;
