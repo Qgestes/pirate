@@ -9,7 +9,7 @@ import {withKnobs, boolean} from '@storybook/addon-knobs';
 
 import Dashboard, {AttackButtons} from '../src/components/Dashboard';
 
-const dashboardState = {player$: 1, life: 3, canonball: 3};
+const dashboardState = {player$: 1, life: 3, cannonball: 3};
 onTurn, onMove, onAttack, onExplore, onFish, onEnroll;
 
 const onTurn = action('Turn');

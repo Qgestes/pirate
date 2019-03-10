@@ -39,14 +39,15 @@ export const getCellPosAttack = (player, attackDirection) => {
 export default function applyAttack(state, player$, attackDirection) {
   const modifier = new StateModifier(state);
 
-  const player = getPlayerFromState(state, player$);
-  modifier.updatePlayer(player$, {canonball: player.canonball - 1});
+  const player = modifier.getPlayer(player$);
+  const otherPlayer = modifier.getOtherPlayer(player$);
 
-  const otherplayer = getOtherPlayerFromState(state, player$);
+  modifier.updatePlayer(player$, {cannonball: player.cannonball - 1});
+  modifier.updatePlayer(player$, {food: player.food - 1});
+
   const targetCellPos = getCellPosAttack(player, attackDirection);
-
-  if (targetCellPos.posX === otherplayer.posX && targetCellPos.posY === otherplayer.posY) {
-    modifier.updatePlayer(otherplayer.player$, {life: otherplayer.life - 1});
+  if (targetCellPos.posX === otherPlayer.posX && targetCellPos.posY === otherPlayer.posY) {
+    modifier.updatePlayer(otherPlayer.player$, {life: otherPlayer.life - 1});
   }
 
   return modifier.state;

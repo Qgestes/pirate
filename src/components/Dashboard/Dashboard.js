@@ -32,7 +32,7 @@ const DashboardSpacerDiv = styled.div`
 `;
 
 const Dashboard = ({state, actions, round}) => {
-  const {player$, life, canonball, food} = state;
+  const {player$, pirate, life, cannonball, food} = state;
   const {onTurn, onMove, onAttack, onExplore, onFish, onEnroll, onAction} = actions;
 
   let actionElements;
@@ -77,9 +77,9 @@ const Dashboard = ({state, actions, round}) => {
           <DashboardButtonDiv onClick={() => onAction(player$, 'turn')}>Turn</DashboardButtonDiv>
           <DashboardButtonDiv onClick={() => onAction(player$, 'move')}>Move</DashboardButtonDiv>
           <DashboardButtonDiv onClick={() => onAction(player$, 'attack')}>Attack</DashboardButtonDiv>
-          <DashboardButtonDiv onClick={() => onAction(player$, 'explore')}>Explore</DashboardButtonDiv>
-          <DashboardButtonDiv onClick={() => onAction(player$, 'fish')}>Fish</DashboardButtonDiv>
-          <DashboardButtonDiv onClick={() => onAction(player$, 'enroll')}>Enroll</DashboardButtonDiv>
+          <DashboardButtonDiv onClick={() => onExplore(player$)}>Explore</DashboardButtonDiv>
+          <DashboardButtonDiv onClick={() => onFish(player$)}>Fish</DashboardButtonDiv>
+          <DashboardButtonDiv onClick={() => onEnroll(player$)}>Enroll</DashboardButtonDiv>
         </React.Fragment>
       );
       break;
@@ -90,7 +90,8 @@ const Dashboard = ({state, actions, round}) => {
     <DashboardDiv>
       <div>{`player: ${player$}`}</div>
       <div>{`life: ${life}`}</div>
-      <div>{`canonball: ${canonball}`}</div>
+      <div>{`pirate: ${pirate}`}</div>
+      <div>{`cannonball: ${cannonball}`}</div>
       <div>{`food: ${food}`}</div>
 
       <DashboardSpacerDiv />

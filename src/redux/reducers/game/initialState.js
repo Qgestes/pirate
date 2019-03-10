@@ -35,20 +35,25 @@ export const initialBoard = [
     {type: 'empty', hidden: true},
   ],
 ];
+const initialResources = {
+  life: 3,
+  cannonball: 0,
+  food: 2,
+  pirate: 1,
+  rhum: 20, //!!!!!
+};
 
 export const initialPlayer1 = {
+  ...initialResources,
   player$: 1,
-  life: 3,
-  canonball: 3,
   posX: 2,
   posY: 0,
   direction: 'south',
 };
 
 export const initialPlayer2 = {
+  ...initialResources,
   player$: 2,
-  life: 3,
-  canonball: 3,
   posX: 2,
   posY: 4,
   direction: 'north',
@@ -80,18 +85,23 @@ export function generateInitialBoard() {
   for (let i = 0; i < 4; i += 1) {
     const pos = generatePos(genBoard);
     genBoard[pos.y][pos.x].type = 'island';
+    genBoard[pos.y][pos.x].resources = {food: 2};
   }
   for (let i = 0; i < 2; i += 1) {
     const pos = generatePos(genBoard);
     genBoard[pos.y][pos.x].type = 'fortress';
+    genBoard[pos.y][pos.x].resources = {cannonball: 2};
   }
   for (let i = 0; i < 1; i += 1) {
     const pos = generatePos(genBoard);
     genBoard[pos.y][pos.x].type = 'merchant';
+    genBoard[pos.y][pos.x].resources = {food: 1, cannonball: 1};
   }
   for (let i = 0; i < 2; i += 1) {
     const pos = generatePos(genBoard);
     genBoard[pos.y][pos.x].type = 'monster';
+    genBoard[pos.y][pos.x].force = 2; //life points
+    genBoard[pos.y][pos.x].resources = {food: 3};
   }
 
   return genBoard;

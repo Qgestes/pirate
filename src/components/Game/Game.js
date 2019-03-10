@@ -16,9 +16,9 @@ const generateActions = dispatch => {
     onTurn: (player$, direction) => dispatch(actions.turnPlayer(player$, direction)),
     onMove: (player$, direction) => dispatch(actions.movePlayer(player$, direction)),
     onAttack: (player$, attackDirection) => dispatch(actions.attack(player$, attackDirection)),
-    onExplore: player$ => dispatch(actions.turnPlayer(player$, 'west')),
+    onExplore: player$ => dispatch(actions.explore(player$)),
     onFish: player$ => dispatch(actions.fish(player$)),
-    onEnroll: player$ => dispatch(actions.movePlayer(player$, 'west')),
+    onEnroll: player$ => dispatch(actions.enroll(player$)),
     onAction: (player$, action) => dispatch(actions.guiDashboardSetAction(player$, action)),
   };
 };

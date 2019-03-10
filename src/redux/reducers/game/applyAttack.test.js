@@ -18,12 +18,12 @@ const genInitialState = () => {
 
 describe('game', () => {
   describe('applyAttack', () => {
-    it('should use a canonball', () => {
+    it('should use a cannonball', () => {
       const modifier = genInitialState();
 
       const result = applyAttack(modifier.state, 1, 'L1');
 
-      const expected = genInitialState().updatePlayer(1, {canonball: 2});
+      const expected = genInitialState().updatePlayer(1, {cannonball: 2});
       expect(result).toEqual(expected.state);
     });
     it('should use attack on L1', () => {
@@ -33,7 +33,7 @@ describe('game', () => {
 
       const result = applyAttack(modifier.state, 1, 'L1');
 
-      const expected = modifier.updatePlayer(1, {canonball: 2}).updatePlayer(2, {life: 2});
+      const expected = modifier.updatePlayer(1, {cannonball: 2}).updatePlayer(2, {life: 2});
 
       expect(result).toEqual(expected.state);
     });

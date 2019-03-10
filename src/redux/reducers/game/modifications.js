@@ -58,4 +58,24 @@ export class StateModifier {
     this.state = applyBoardCellUpdate(this.state, posX, posY, modifications);
     return this;
   }
+
+  getPlayer(player$) {
+    return getPlayerFromState(this.state, player$);
+  }
+
+  getOtherPlayer(player$) {
+    return getOtherPlayerFromState(this.state, player$);
+  }
+
+  getCell(posX, posY) {
+    return this.state.board[posY][posX];
+  }
+
+  updatePlayerResources(player$, resources) {
+    for (const [name, value] of Object.entries(resources)) {
+      const oldValue = this.getPlayer(player$)[name];
+      this.updatePlayer(player$, {[name]: oldValue + value});
+    }
+    return this;
+  }
 }
