@@ -44,12 +44,12 @@ const Dashboard = ({state, actions}) => {
       <div>{`canon: ${canon}`}</div>
       <div>{`sail: ${sail}`}</div>
       <DashboardSpacerDiv />
-      <DashboardButtonDiv onClick={onTurn}>Turn</DashboardButtonDiv>
-      <DashboardButtonDiv onClick={onMove}>Move</DashboardButtonDiv>
-      <DashboardButtonDiv onClick={onAttack}>Attack</DashboardButtonDiv>
-      <DashboardButtonDiv onClick={onExplore}>Explore</DashboardButtonDiv>
-      <DashboardButtonDiv onClick={onFish}>Fish</DashboardButtonDiv>
-      <DashboardButtonDiv onClick={onEnroll}>Enroll</DashboardButtonDiv>
+      <DashboardButtonDiv onClick={() => onTurn(player)}>Turn</DashboardButtonDiv>
+      <DashboardButtonDiv onClick={() => onMove(player)}>Move</DashboardButtonDiv>
+      <DashboardButtonDiv onClick={() => onAttack(player)}>Attack</DashboardButtonDiv>
+      <DashboardButtonDiv onClick={() => onExplore(player)}>Explore</DashboardButtonDiv>
+      <DashboardButtonDiv onClick={() => onFish(player)}>Fish</DashboardButtonDiv>
+      <DashboardButtonDiv onClick={() => onEnroll(player)}>Enroll</DashboardButtonDiv>
     </DashboardDiv>
   );
 };
