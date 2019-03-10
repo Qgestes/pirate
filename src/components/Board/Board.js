@@ -20,10 +20,11 @@ const isPlayerOnCell = (x, y, player) => {
 };
 
 const calcPlayer = (x, y, player1, player2) => {
-  if (isPlayerOnCell(x, y, player1)) return {player: 1, direction: player1.direction};
-  if (isPlayerOnCell(x, y, player2)) return {player: 2, direction: player2.direction};
+  let playerState = {};
+  if (isPlayerOnCell(x, y, player1)) playerState = {...playerState, player1: player1.direction};
+  if (isPlayerOnCell(x, y, player2)) playerState = {...playerState, player2: player2.direction};
 
-  return {};
+  return playerState;
 };
 
 const BoardRow = ({y, row, player1, player2}) => {
@@ -33,7 +34,7 @@ const BoardRow = ({y, row, player1, player2}) => {
     const cellState = row[x];
     const playerState = calcPlayer(x, y, player1, player2);
 
-    columns[x] = <BoardCell {...cellState} {...playerState} />;
+    columns[x] = <BoardCell key={x} {...cellState} {...playerState} />;
   }
 
   return <BoardRowDiv>{columns}</BoardRowDiv>;
@@ -43,7 +44,7 @@ const Board = ({state, player1, player2}) => {
   const rows = [];
 
   for (let y = 0; y < 5; y += 1) {
-    rows[y] = <BoardRow y={y} row={state[y]} player1={player1} player2={player2} />;
+    rows[y] = <BoardRow key={y} y={y} row={state[y]} player1={player1} player2={player2} />;
   }
 
   return <div>{rows}</div>;

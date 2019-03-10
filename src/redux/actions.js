@@ -1,5 +1,6 @@
 export const GAME_TURN_PLAYER = 'GAME_TURN_PLAYER';
 export const GAME_MOVE_PLAYER = 'GAME_MOVE_PLAYER';
+export const GUI_DASHBOARD_SET_ACTION = 'GUI_DASHBOARD_SET_ACTION';
 
 export const turnPlayer = (player, direction) => ({
   type: GAME_TURN_PLAYER,
@@ -14,5 +15,13 @@ export const movePlayer = (player, direction) => ({
   payload: {
     player,
     direction,
+  },
+});
+
+export const guiDashboardSetAction = (player, action) => ({
+  type: GUI_DASHBOARD_SET_ACTION,
+  payload: {
+    player,
+    action,
   },
 });

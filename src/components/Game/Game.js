@@ -13,21 +13,22 @@ const GameDiv = styled.div`
 
 const generateActions = dispatch => {
   return {
-    onTurn: player$ => dispatch(actions.turnPlayer(player$, 'north')),
-    onMove: player$ => dispatch(actions.turnPlayer(player$, 'east')),
+    onTurn: (player$, direction) => dispatch(actions.turnPlayer(player$, direction)),
+    onMove: (player$, direction) => dispatch(actions.movePlayer(player$, direction)),
     onAttack: player$ => dispatch(actions.turnPlayer(player$, 'south')),
     onExplore: player$ => dispatch(actions.turnPlayer(player$, 'west')),
     onFish: player$ => dispatch(actions.movePlayer(player$, 'west')),
     onEnroll: player$ => dispatch(actions.movePlayer(player$, 'west')),
+    onAction: (player$, action) => dispatch(actions.guiDashboardSetAction(player$, action)),
   };
 };
 
-export const GameBase = ({game, dispatch}) => {
+export const GameBase = ({game, gui, dispatch}) => {
   return (
     <GameDiv>
-      <Dashboard state={game.player1} actions={generateActions(dispatch)} />
+      <Dashboard state={game.player1} actions={generateActions(dispatch)} round={gui.player1} />
       <Board state={game.board} player1={game.player1} player2={game.player2} />
-      <Dashboard state={game.player2} actions={generateActions(dispatch)} />
+      <Dashboard state={game.player2} actions={generateActions(dispatch)} round={gui.player2} />
     </GameDiv>
   );
 };
@@ -35,6 +36,7 @@ export const GameBase = ({game, dispatch}) => {
 const mapStateToProps = state => {
   return {
     game: state.game,
+    gui: state.gui,
   };
 };
 

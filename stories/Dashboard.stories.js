@@ -19,6 +19,10 @@ const onExplore = action('Explore');
 const onFish = action('Fish');
 const onEnroll = action('Enroll');
 
-const actions = {onTurn, onMove, onAttack, onExplore, onFish, onEnroll};
+const onAction = action('Action');
+const actions = {onTurn, onMove, onAttack, onExplore, onFish, onEnroll, onAction};
 
-storiesOf('Dashboard', module).add('stuffed', () => <Dashboard state={dashboardState} actions={actions} />);
+storiesOf('Dashboard', module)
+  .add('normal', () => <Dashboard state={dashboardState} actions={actions} round={{}} />)
+  .add('turning', () => <Dashboard state={dashboardState} actions={actions} round={{action: 'turn'}} />)
+  .add('moving', () => <Dashboard state={dashboardState} actions={actions} round={{action: 'move'}} />);

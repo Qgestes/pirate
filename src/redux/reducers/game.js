@@ -91,7 +91,7 @@ function generatePlayer(player$, player) {
   throw new Error('Invalid player');
 }
 
-function generatePlayerUpdate(state, player$, modifications) {
+export function generatePlayerUpdate(state, player$, modifications) {
   const player = getPlayer(state, player$);
   return generatePlayer(player$, {...player, ...modifications});
 }

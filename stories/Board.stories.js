@@ -92,46 +92,54 @@ storiesOf('Board/Cell', module)
     <BoardCell
       type="island"
       hidden={boolean('Hidden', false)}
-      direction={select('Direction', optionsDirection, null)}
-      player={select('Player', optionsPlayer, null)}
+      player1={select('P1', optionsDirection, null)}
+      player2={select('P2', optionsDirection, null)}
     />
   ))
   .add('monster', () => (
     <BoardCell
       type="monster"
       hidden={boolean('Hidden', false)}
-      direction={select('Direction', optionsDirection, null)}
-      player={select('Player', optionsPlayer, null)}
+      player1={select('P1', optionsDirection, null)}
+      player2={select('P2', optionsDirection, null)}
     />
   ))
   .add('merchant', () => (
     <BoardCell
       type="merchant"
       hidden={boolean('Hidden', false)}
-      direction={select('Direction', optionsDirection, null)}
-      player={select('Player', optionsPlayer, null)}
+      player1={select('P1', optionsDirection, null)}
+      player2={select('P2', optionsDirection, null)}
     />
   ))
   .add('fortress', () => (
     <BoardCell
       type="fortress"
       hidden={boolean('Hidden', false)}
-      direction={select('Direction', optionsDirection, null)}
-      player={select('Player', optionsPlayer, null)}
+      player1={select('P1', optionsDirection, null)}
+      player2={select('P2', optionsDirection, null)}
     />
   ))
   .add('hidden', () => (
     <BoardCell
       hidden={boolean('Hidden', true)}
-      direction={select('Direction', optionsDirection, null)}
-      player={select('Player', optionsPlayer, null)}
+      player1={select('P1', optionsDirection, null)}
+      player2={select('P2', optionsDirection, null)}
     />
   ))
-  .add('player1', () => (
+  .add('player 1', () => (
     <BoardCell
       type="fortress"
       hidden={boolean('Hidden', false)}
-      direction={select('Direction', optionsDirection, 'east')}
-      player={select('Player', optionsPlayer, 1)}
+      player1={select('P1', optionsDirection, 'north')}
+      player2={select('P2', optionsDirection, null)}
+    />
+  ))
+  .add('player 1 & 2', () => (
+    <BoardCell
+      type="fortress"
+      hidden={boolean('Hidden', false)}
+      player1={select('P1', optionsDirection, 'north')}
+      player2={select('P2', optionsDirection, 'south')}
     />
   ));
